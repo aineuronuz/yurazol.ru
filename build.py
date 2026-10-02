@@ -16,9 +16,14 @@ def typo(text):
     return text
 
 
-src = (ROOT / "src/index.html").read_text()
-parts = re.split(r"(<script.*?</script>|<style.*?</style>|<[^>]+>)", src, flags=re.S)
-out = "".join(p if p.startswith("<") else typo(p) for p in parts)
-out = out.replace('href="MAX_HREF"', f'href="{MAX_HREF}"')
-(ROOT / "docs/index.html").write_text(out)
-print("index.html", len(out))
+def render(src):
+    """Исходник страницы -> готовый HTML (им же пользуется сборка mtk-vostok-avto.ru)."""
+    parts = re.split(r"(<script.*?</script>|<style.*?</style>|<title.*?</title>|<[^>]+>)", src, flags=re.S)
+    out = "".join(p if p.startswith("<") else typo(p) for p in parts)
+    return out.replace('href="MAX_HREF"', f'href="{MAX_HREF}"')
+
+
+if __name__ == "__main__":
+    out = render((ROOT / "src/index.html").read_text())
+    (ROOT / "docs/index.html").write_text(out)
+    print("index.html", len(out))

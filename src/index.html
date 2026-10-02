@@ -46,7 +46,7 @@ a{color:inherit}
 .wrap{max-width:1240px;margin:0 auto;padding:0 22px}
 .u{font-family:'Unbounded',sans-serif}
 .acc{color:var(--acc)}
-.gold{background:linear-gradient(100deg,var(--gt1),var(--gt2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.gold{color:var(--acc)}
 
 /* шапка */
 .top{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
@@ -65,8 +65,8 @@ a{color:inherit}
 .nav a:hover{color:var(--ink)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 28px;border-radius:999px;
 font-family:'Unbounded',sans-serif;font-weight:600;font-size:14.5px;text-decoration:none;white-space:nowrap;transition:transform .2s,box-shadow .2s,border-color .2s}
-.btn.g{background:linear-gradient(100deg,var(--g1),var(--g2));color:var(--gink);box-shadow:0 8px 26px -6px rgba(170,130,20,.45)}
-.btn.g:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(201,162,39,.38)}
+.btn.g{background:linear-gradient(100deg,color-mix(in srgb,var(--acc) 82%,#fff),var(--acc));color:#fff;box-shadow:0 10px 26px -10px var(--acc)}
+.btn.g:hover{transform:translateY(-2px);background:var(--acc2);box-shadow:0 14px 32px -10px var(--acc2)}
 .btn.o{border:1px solid color-mix(in srgb,var(--ink) 28%,transparent);color:var(--ink);background:var(--card)}
 .btn.o:hover{border-color:var(--acc)}
 .btn.sm{height:44px;padding:0 20px;font-size:13px}
@@ -103,7 +103,7 @@ backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:fl 6s ease
 .row span{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,46px);white-space:nowrap;padding-right:34px}
 .row span{color:var(--acc2)}
 .row.r span{color:transparent;-webkit-text-stroke:1.2px color-mix(in srgb,var(--acc) 55%,transparent);font-weight:600}
-.row i{font-style:normal;color:var(--g2);padding-right:34px;font-size:.6em;vertical-align:.3em}
+.row i{font-style:normal;color:var(--acc);padding-right:34px;font-size:.6em;vertical-align:.3em}
 @keyframes mq{to{transform:translateX(-50%)}}
 
 /* заявление */
@@ -147,6 +147,7 @@ section.sec{padding:120px 0 20px}
 .step.fin{background:linear-gradient(140deg,var(--acc),var(--acc2));color:#fff;border-color:transparent;display:flex;flex-direction:column;justify-content:space-between}
 .step.fin p{margin:0;font-family:'Unbounded',sans-serif;font-weight:600;font-size:20px;line-height:1.3}
 .step.fin .btn{margin-top:22px;align-self:flex-start}
+.step.fin .btn.g{background:#fff;color:var(--acc2);box-shadow:none}
 
 .dv{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .car{background:var(--card);box-shadow:var(--sh);border:1px solid var(--line);border-radius:22px;overflow:hidden}
@@ -186,7 +187,7 @@ background:radial-gradient(600px 220px at 0% 0%,var(--soft),transparent),var(--c
 .links a .ar{font-size:24px;color:var(--acc);transition:transform .25s}
 .links a:hover{padding-left:12px}.links a:hover .ar{transform:translateX(6px)}
 .who{background:var(--card);box-shadow:var(--sh);border:1px solid var(--line);border-radius:24px;padding:30px;text-align:center}
-.who img{width:132px;height:132px;border-radius:50%;margin:0 auto 18px;border:2px solid color-mix(in srgb,var(--g2) 70%,transparent)}
+.who img{width:132px;height:132px;border-radius:50%;margin:0 auto 18px;border:2px solid color-mix(in srgb,var(--acc) 70%,transparent)}
 .who b{display:block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:21px}
 .who>span{display:block;color:var(--muted);font-size:14.5px;margin:8px 0 22px}
 .who .btn{width:100%}
@@ -390,7 +391,7 @@ section.sec{padding:90px 0 10px}
 <section class="fin2" id="contacts">
   <div class="wrap">
     <div class="eb">Связаться</div>
-    <h2 class="rv">Ваш автомобиль<br><span class="acc">из Китая.</span><br><span class="gold">Под ключ.</span></h2>
+    <h2 class="rv">Ваш автомобиль<br>из Китая.<br><span class="acc">Под ключ.</span></h2>
     <div class="cgrid">
       <div class="rv">
         <p>Напишите, какую машину и в какой город хотите, — подберём варианты и посчитаем стоимость под ключ.</p>
@@ -425,7 +426,7 @@ section.sec{padding:90px 0 10px}
 (function(){
   var d=document.documentElement;
   var p=new URLSearchParams(location.search).get('p');
-  if(p==='wine'||p==='graphite')d.classList.add(p);
+  if(p&&/^[a-z-]{2,24}$/.test(p))d.classList.add(p);
   var top=document.getElementById('top'),ghost=document.querySelector('.ghost');
   /* размер шрифта: A− / A+ */
   var FS=[.9,1,1.12,1.25,1.4],fi=1;
