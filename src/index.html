@@ -173,6 +173,15 @@ section.sec{padding:120px 0 20px}
 background:radial-gradient(600px 220px at 0% 0%,var(--soft),transparent),var(--card);box-shadow:var(--sh)}
 .any p{margin:0;max-width:720px;font-size:16.5px}
 .any p b{font-family:'Unbounded',sans-serif;font-weight:600}
+.dlg{border:0;padding:0;background:transparent;color:var(--ink);width:calc(100% - 28px);max-width:440px}
+.dlg::backdrop{background:rgba(10,24,28,.55);backdrop-filter:blur(3px)}
+.dlg-in{position:relative;background:var(--card);border-radius:26px;padding:32px 26px 28px;box-shadow:0 24px 60px -12px rgba(0,0,0,.35)}
+.dlg h3{font-family:'Unbounded',sans-serif;font-weight:700;font-size:22px;line-height:1.2;margin:16px 0 12px;padding-right:30px}
+.dlg p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.5}
+.dlg .x{position:absolute;right:16px;top:16px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:20px;line-height:1;cursor:pointer}
+.dlg .x:hover{border-color:var(--acc);color:var(--ink)}
+.dlg .mbtns{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.dlg .mbtns .btn{justify-content:space-between;text-align:left;height:auto;min-height:54px;padding-top:10px;padding-bottom:10px}
 
 /* контакты */
 .fin2{padding:150px 0 90px;position:relative;overflow:hidden}
@@ -377,14 +386,14 @@ section.sec{padding:90px 0 10px}
   <div class="wrap">
     <div class="eb">Каталог</div>
     <div class="hd"><h2 class="rv">91 модель под <span class="acc">льготный утильсбор</span></h2>
-      <p class="rv">Электромобили, гибриды и бензиновые машины до 160 л.с. — с ценой под ключ. Каталог пришлём в Telegram, MAX или WhatsApp.</p></div>
+      <p class="rv">Электромобили, гибриды и бензиновые машины до 160 л.с. — с ценой под ключ. Полный каталог — в нашем канале.</p></div>
     <div class="cat">
       <div class="tile rv"><picture><source srcset="assets/img/sec0.webp" type="image/webp"><img src="assets/img/sec0.jpg" alt="Электромобили" loading="lazy" width="1000" height="558"></picture><div><b>Электро</b><span>Утильсбор 3 400 ₽. У автомобилей с мотором мощнее 58,8 кВт он около миллиона и выше.</span></div></div>
       <div class="tile rv"><picture><source srcset="assets/img/sec1.webp" type="image/webp"><img src="assets/img/sec1.jpg" alt="Гибриды" loading="lazy" width="1000" height="558"></picture><div><b>Гибриды</b><span>Гибриды Toyota с льготным утильсбором: экономия топлива без зарядки от розетки.</span></div></div>
       <div class="tile rv"><picture><source srcset="assets/img/sec2.webp" type="image/webp"><img src="assets/img/sec2.jpg" alt="Монопривод" loading="lazy" width="1000" height="558"></picture><div><b>Монопривод</b><span>Проверенные модели до 160 л.с. — утильсбор 5 200 ₽ вместо сотен тысяч.</span></div></div>
       <div class="tile rv"><picture><source srcset="assets/img/sec3.webp" type="image/webp"><img src="assets/img/sec3.jpg" alt="Полный привод" loading="lazy" width="1000" height="558"></picture><div><b>Полный привод</b><span>Полный привод до 160 л.с. — тоже с льготным утильсбором 5 200 ₽.</span></div></div>
     </div>
-    <div class="any rv"><p><b>Любые автомобили.</b> Под заказ привезём любые машины из Китая, в том числе мощные, и посчитаем стоимость под ключ по Вашему запросу.</p><a class="btn g" href="https://t.me/YuraZol">Получить каталог <span class="ar">→</span></a></div>
+    <div class="any rv"><p><b>Любые автомобили.</b> Под заказ привезём любые машины из Китая, в том числе мощные, и посчитаем стоимость под ключ по Вашему запросу.</p><a class="btn g" data-cat href="CAT_HREF">Получить каталог <span class="ar">→</span></a></div>
   </div>
 </section>
 
@@ -413,6 +422,17 @@ section.sec{padding:90px 0 10px}
   </div>
 </section>
 </main>
+
+<dialog class="dlg" id="getcat" aria-labelledby="getcat-h"><div class="dlg-in">
+  <button class="x" type="button" aria-label="Закрыть" data-close>×</button>
+  <div class="eb">Каталог</div>
+  <h3 id="getcat-h">Каталог — в нашем канале</h3>
+  <p>Подпишитесь на канал YuraZol Авто в Telegram или MAX. Сразу после подписки каталог 91&nbsp;модели с ценами под ключ можно скачать в канале.</p>
+  <div class="mbtns">
+    <a class="btn g" href="CAT_TG_HREF" target="_blank" rel="noopener">Канал в Telegram <span class="ar">→</span></a>
+    <a class="btn g" href="CAT_MAX_HREF" target="_blank" rel="noopener">Канал в MAX <span class="ar">→</span></a>
+  </div>
+</div></dialog>
 
 <footer>
   <div class="wrap">
@@ -449,6 +469,10 @@ section.sec{padding:90px 0 10px}
       t=still?1:Math.min(1,Math.max(0,(h*.85-r.top)/(r.height+h*.35))),n=Math.round(t*ws.length);
       for(var i=0;i<ws.length;i++)ws[i].classList.toggle('on',i<n)}}
   addEventListener('scroll',sc,{passive:true});addEventListener('resize',sc);sc();
+  /* «Получить каталог» — окно с каналами */
+  var dlg=document.getElementById('getcat');
+  if(dlg&&dlg.showModal){document.querySelectorAll('[data-cat]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();dlg.showModal()})});
+    dlg.addEventListener('click',function(e){if(e.target===dlg||e.target.closest('[data-close]'))dlg.close()})}
   /* появление блоков */
   var els=document.querySelectorAll('.rv');
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
