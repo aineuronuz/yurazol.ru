@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-CHANNELS = {"tg": None, "mx": None}   # каналы YuraZol Авто для «Получить каталог»: Юрий ещё не прислал
+CHANNELS = {"tg": None, "mx": None}   # каналы YuraZol Auto для «Получить каталог»: Юрий ещё не прислал
 MAX_HREF = "https://max.ru/u/f9LHodD0cOLQzwPoUyWBoejqc5iq940FAYmSIsMAm8Hr1FcNu85zWG126zY"
 SHORT = r"(?<![\wА-Яа-яЁё-])([вВкКсСоОуУиИаАяЯ]|на|На|по|По|до|До|от|От|из|Из|не|Не|за|За|для|Для|без|Без|при|При|или|под|Под|что|до|мы|Мы|их|её|он)( )"
 
