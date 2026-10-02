@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /foto/
 Sitemap: https://yurazol.ru/sitemap.xml

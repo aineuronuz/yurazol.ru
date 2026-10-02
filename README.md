@@ -7,3 +7,7 @@
 - `shot.py` — скриншоты для согласования.
 
 В репо нет персональных данных клиентов: репо публичное.
+
+## Страницы фото для КП
+`python3 foto.py <код>` — из `~/yurazol-sites/foto-inbox/<код>/` (1.jpg…N.jpg + title.txt) собирает `docs/foto/<код>/`.
+Ссылка `https://yurazol.ru/foto/<код>/#N` открывает фото N (PhotoSwipe 5, MIT, в `docs/assets/vendor/photoswipe`). Страницы закрыты от поиска (noindex, robots.txt).
