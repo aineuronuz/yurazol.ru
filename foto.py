@@ -1,8 +1,9 @@
-"""Страница оригиналов фото для КП: python3 foto.py <код>
+"""Страница оригиналов фото для КП: python3 foto.py [--mtk] <код>
 
 Берёт ~/yurazol-sites/foto-inbox/<код>/ (1.jpg…N.jpg + title.txt) и собирает
 docs/foto/<код>/ — оригиналы (до 2560 px), превью t/N.jpg и index.html.
 Ссылка для КП: https://yurazol.ru/foto/<код>/#N — сразу открывает фото N.
+С --mtk — то же для mtk-vostok-avto.ru: фото из foto-inbox-mtk/, страница в ../mtk-vostok-avto.ru/docs/foto/.
 """
 import html
 import re
@@ -13,7 +14,6 @@ from pathlib import Path
 from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parent
-INBOX = ROOT.parent / "foto-inbox"
 MAX_SIDE = 2560
 MAX_HREF = "https://max.ru/u/f9LHodD0cOLQzwPoUyWBoejqc5iq940FAYmSIsMAm8Hr1FcNu85zWG126zY"
 
@@ -27,12 +27,27 @@ def photos(src):
     return files
 
 
-def build(code):
+SITES = {
+    "yurazol.ru": dict(
+        inbox=ROOT.parent / "foto-inbox", docs=ROOT / "docs", brand="YuraZol Авто",
+        icon='<link rel="icon" type="image/png" href="../../assets/favicon.png">\n',
+        logo='<img src="../../assets/img/logo96.png" alt="" width="40" height="39">', more=""),
+    "mtk-vostok-avto.ru": dict(   # логотипа и значка у МТК пока нет
+        inbox=ROOT.parent / "foto-inbox-mtk", docs=ROOT.parent / "mtk-vostok-avto.ru" / "docs", brand="МТК Восток-Авто",
+        icon="", logo="", more='<a class="btn" href="../../#contacts">Все контакты</a>'),
+}
+
+
+def build(code, site="yurazol.ru"):
+    cfg = SITES[site]
     if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", code):
         sys.exit("код: строчная латиница, цифры и дефис")
-    src = INBOX / code
+    src = cfg["inbox"] / code
     title = (src / "title.txt").read_text(encoding="utf-8").strip()
-    out = ROOT / "docs" / "foto" / code
+    out = cfg["docs"] / "foto" / code
+    vendor = cfg["docs"] / "assets" / "vendor"
+    if not vendor.exists():
+        shutil.copytree(ROOT / "docs" / "assets" / "vendor", vendor)
     if out.exists():
         shutil.rmtree(out)
     (out / "t").mkdir(parents=True)
@@ -57,9 +72,10 @@ def build(code):
         f'<img src="t/{n}.jpg" alt="{t}, фото {n}" width="{w}" height="{h}" loading="{"eager" if n <= 6 else "lazy"}"><span>{n}</span></a>'
         for n, w, h in items)
     page = TEMPLATE.replace("{TITLE}", t).replace("{COUNT}", str(len(items))).replace("{CARDS}", cards) \
-                   .replace("{MAX}", MAX_HREF).replace("{WORD}", word(len(items)))
+                   .replace("{MAX}", MAX_HREF).replace("{WORD}", word(len(items))) \
+                   .replace("{BRAND}", cfg["brand"]).replace("{ICON}", cfg["icon"]).replace("{LOGO}", cfg["logo"]).replace("{MORE}", cfg["more"])
     (out / "index.html").write_text(page, encoding="utf-8")
-    print(f"docs/foto/{code}/: {len(items)} фото — https://yurazol.ru/foto/{code}/#1")
+    print(f"{out}: {len(items)} фото — https://{site}/foto/{code}/#1")
 
 
 def word(n):
@@ -75,10 +91,9 @@ TEMPLATE = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>{TITLE} — фото | YuraZol Авто</title>
+<title>{TITLE} — фото | {BRAND}</title>
 <meta name="theme-color" content="#f5f7fb">
-<link rel="icon" type="image/png" href="../../assets/favicon.png">
-<link rel="stylesheet" href="../../assets/vendor/photoswipe/photoswipe.css">
+{ICON}<link rel="stylesheet" href="../../assets/vendor/photoswipe/photoswipe.css">
 <style>
 @font-face{font-family:'Unbounded';src:url('../../assets/fonts/Unbounded-cyrillic.woff2') format('woff2');font-weight:200 900;font-display:swap;unicode-range:U+0400-045F}
 @font-face{font-family:'Unbounded';src:url('../../assets/fonts/Unbounded-latin.woff2') format('woff2');font-weight:200 900;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F}
@@ -110,14 +125,14 @@ background:#fff;color:#1d3d6b;border:1px solid rgba(29,61,107,.2)}
 </head>
 <body>
 <div class="wrap">
-  <header><img src="../../assets/img/logo96.png" alt="" width="40" height="39"><span><b>YuraZol Авто</b><small>автомобили из Китая под ключ</small></span></header>
+  <header>{LOGO}<span><b>{BRAND}</b><small>автомобили из Китая под ключ</small></span></header>
   <h1>{TITLE}</h1>
   <p class="sub">{COUNT} {WORD} автомобиля. Нажмите на фото — откроется в полном размере: листайте пальцем, приближайте двумя пальцами.</p>
   <div class="g" id="g">
 {CARDS}
   </div>
   <footer><p>Вопросы по автомобилю — Юрию:</p>
-    <a class="btn g1" href="https://t.me/YuraZol">Telegram</a><a class="btn" href="{MAX}">MAX</a><a class="btn" href="https://wa.me/79119261617">WhatsApp</a></footer>
+    <a class="btn g1" href="https://t.me/YuraZol">Telegram</a><a class="btn" href="{MAX}">MAX</a><a class="btn" href="https://wa.me/79119261617">WhatsApp</a>{MORE}</footer>
 </div>
 <script type="module">
 import PhotoSwipeLightbox from '../../assets/vendor/photoswipe/photoswipe-lightbox.esm.min.js';
@@ -145,6 +160,10 @@ openHash();
 """
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    args = sys.argv[1:]
+    site = "yurazol.ru"
+    if args[:1] == ["--mtk"]:
+        site, args = "mtk-vostok-avto.ru", args[1:]
+    if len(args) != 1:
         sys.exit(__doc__)
-    build(sys.argv[1])
+    build(args[0], site)
