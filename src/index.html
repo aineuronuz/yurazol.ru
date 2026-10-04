@@ -80,8 +80,9 @@ background:radial-gradient(closest-side,var(--glow),transparent 72%);pointer-eve
 .ghost{position:absolute;left:50%;top:330px;transform:translateX(-50%);font-family:'Unbounded',sans-serif;font-weight:800;
 font-size:21vw;line-height:1;white-space:nowrap;color:transparent;-webkit-text-stroke:1.2px var(--line);pointer-events:none;user-select:none;will-change:transform}
 .eyebrow{font-family:'Unbounded',sans-serif;font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--acc)}
-.hero h1{position:relative;font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(36px,6.4vw,82px);line-height:1.04;
-letter-spacing:-.01em;margin:22px auto 26px;max-width:1080px}
+.hero h1{position:relative;font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(34px,5vw,68px);line-height:1.06;
+letter-spacing:-.01em;margin:22px auto 26px;max-width:1180px}
+.hero h1 .gold{display:block}
 .hero .lead{position:relative;color:var(--muted);font-size:clamp(16px,1.6vw,19px);max-width:700px;margin:0 auto 34px}
 .cta{position:relative;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .shot{position:relative;margin:64px auto 0;max-width:1180px}
@@ -129,9 +130,14 @@ section.sec{padding:120px 0 20px}
 .hd h2{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(32px,4.6vw,62px);line-height:1.06;margin:0;letter-spacing:-.01em}
 .hd p{color:var(--muted);margin:0;font-size:16.5px}
 
-.inc{display:grid;grid-template-columns:1fr 1fr;gap:0 46px;border-top:1px solid var(--line)}
-.inc div{display:grid;grid-template-columns:58px 1fr;gap:6px 14px;align-content:start;padding:24px 0;border-bottom:1px solid var(--line)}
-.inc em{grid-row:span 2;font-style:normal;font-family:'Unbounded',sans-serif;font-size:14px;color:var(--acc);padding-top:3px}
+.stg{display:grid;grid-template-columns:58px 1fr;column-gap:14px;padding:26px 0;border-top:1px solid var(--line)}
+.stg:last-of-type{border-bottom:1px solid var(--line)}
+.sh{grid-column:1/-1;display:grid;grid-template-columns:58px 1fr;gap:6px 14px}
+.sh em{grid-row:span 2;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-family:'Unbounded',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--acc)}
+.sh b{font-family:'Unbounded',sans-serif;font-weight:600;font-size:20px;line-height:1.3;padding-top:6px}
+.sh span{color:var(--muted);font-size:15.5px;line-height:1.45}
+.inc{grid-column:2;display:grid;grid-template-columns:1fr 1fr;gap:0 46px;margin-top:10px}
+.inc div{display:grid;gap:6px;align-content:start;padding:16px 0;border-bottom:1px solid var(--line)}
 .inc b{font-weight:650;font-size:18px;line-height:1.35}
 .inc span{color:var(--muted);font-size:15.5px;line-height:1.45}
 .note{color:var(--muted);font-size:14.5px;margin-top:26px;max-width:820px}
@@ -144,6 +150,7 @@ section.sec{padding:120px 0 20px}
 .step small{display:block;margin-top:18px;font-family:'Unbounded',sans-serif;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 .step b{display:block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:19px;margin:8px 0 10px}
 .step span{color:var(--muted);font-size:15px;line-height:1.5}
+.step .spay{display:block;margin-top:14px;padding:10px 12px;border-radius:12px;background:var(--soft);color:var(--acc2);font-size:13.5px;font-weight:600;line-height:1.45}
 .step.fin{background:linear-gradient(140deg,var(--acc),var(--acc2));color:#fff;border-color:transparent;display:flex;flex-direction:column;justify-content:space-between}
 .step.fin p{margin:0;font-family:'Unbounded',sans-serif;font-weight:600;font-size:20px;line-height:1.3}
 .step.fin .btn{margin-top:22px;align-self:flex-start}
@@ -229,7 +236,7 @@ footer p{margin:0;max-width:560px}
 @media (max-width:420px){.brand b{display:none}.hs{display:none}}
 @media (max-width:560px){
 body{font-size:16px}
-.hero h1{font-size:calc(min(38px,9.6vw) / var(--fs,1))}
+.hero h1{font-size:calc(min(32px,8.2vw) / var(--fs,1))}
 .hd h2{font-size:calc(min(32px,8.4vw) / var(--fs,1))}
 .fin2 h2{font-size:calc(min(42px,10.6vw) / var(--fs,1))}
 .say h2{font-size:calc(min(28px,7.4vw) / var(--fs,1))}
@@ -253,7 +260,7 @@ body{font-size:16px}
 .stat{padding:22px 18px}
 .stat>span{font-size:13.5px}
 section.sec{padding:90px 0 10px}
-.inc div{grid-template-columns:44px 1fr;padding:18px 0}
+.stg,.sh{grid-template-columns:48px 1fr}.sh b{font-size:17px}.inc div{padding:14px 0}
 .inc b{font-size:16.5px}
 .steps{grid-template-columns:1fr}
 .step .n{font-size:52px}
@@ -287,7 +294,7 @@ section.sec{padding:90px 0 10px}
   <div class="ghost" aria-hidden="true">YURAZOL</div>
   <div class="wrap">
     <div class="eyebrow">Подбор автомобиля и сопровождение сделки</div>
-    <h1>Автомобили из Китая <span class="gold">под ключ</span></h1>
+    <h1>Новые и б/у автомобили из Китая <span class="gold">под льготный утильсбор</span></h1>
     <p class="lead">Подбираем и проверяем машину в Китае, работаем по договору, доставляем, растаможиваем и передаём Вам с электронным ПТС. Санкт-Петербург, Екатеринбург и другие города.</p>
     <div class="cta">
       <a class="btn g" href="https://t.me/YuraZol">Написать в Telegram <span class="ar">→</span></a>
@@ -316,9 +323,9 @@ section.sec{padding:90px 0 10px}
     <h2 data-k="проверка|договор|доставка|таможня|документы">Автомобиль из Китая — это не только цена в объявлении. Это проверка, договор, доставка, таможня и документы.</h2>
     <p class="rv">Всё это — наша работа: подбор автомобиля и сопровождение сделки от выбора модели до выдачи ключей.</p>
     <div class="stats">
-      <div class="stat rv"><b>45–60<small>дней</small></b><span>срок от оплаты до выдачи — ориентир по договору</span></div>
+      <div class="stat rv"><b>50–65<small>дней</small></b><span>срок от оплаты до выдачи — ориентир по договору</span></div>
       <div class="stat rv"><b>7<small>этапов</small></b><span>от выбора автомобиля до постановки на учёт</span></div>
-      <div class="stat rv"><b>91<small>модель</small></b><span>в каталоге — под льготный утильсбор</span></div>
+      <div class="stat rv"><b>92<small>модели</small></b><span>в каталоге — под льготный утильсбор</span></div>
       <div class="stat rv"><b>2016</b><span>с этого года работаем с Китаем</span></div>
     </div>
   </div>
@@ -328,18 +335,31 @@ section.sec{padding:90px 0 10px}
   <div class="wrap">
     <div class="eb">Что входит в цену</div>
     <div class="hd"><h2 class="rv">Одна цена — <span class="acc">под ключ</span></h2>
-      <p class="rv">В неё уже входят автомобиль, доставка, растаможка, оформление документов и наши услуги. Скрытых платежей нет. Точную сумму на конкретный автомобиль считаем в коммерческом предложении по курсу дня.</p></div>
-    <div class="inc rv">
-      <div><em>01</em><b>Автомобиль в Китае</b><span>по курсу банка ВТБ на день оплаты</span></div>
-      <div><em>02</em><b>Доставка из Китая в Россию</b><span>автовозом</span></div>
-      <div><em>03</em><b>Погрузка и доставка по Китаю</b><span>от продавца до нашей площадки на автовозе</span></div>
-      <div><em>04</em><b>Комиссия банка за перевод</b><span>2% от стоимости автомобиля и доставки</span></div>
-      <div><em>05</em><b>Таможенная пошлина</b><span>для автомобилей 3–5 лет — по объёму двигателя, для электромобилей — от стоимости</span></div>
-      <div><em>06</em><b>Таможенный сбор</b><span>зависит от стоимости автомобиля</span></div>
-      <div><em>07</em><b>Утилизационный сбор</b><span>у моделей из каталога льготный: 3 400 ₽ до 3 лет, 5 200 ₽ от 3 до 5 лет</span></div>
-      <div><em>08</em><b>Склад временного хранения</b><span>первые сутки</span></div>
-      <div><em>09</em><b>Оформление документов</b><span>растаможка, СБКТС и электронный ПТС</span></div>
-      <div><em>10</em><b>Подбор автомобиля и сопровождение сделки</b><span>проверка машины и документов, договор</span></div>
+      <p class="rv">В неё уже входят автомобиль, доставка, растаможка, оформление документов и наши услуги. Платите в четыре этапа по договору, без скрытых платежей: кроме перечисленных здесь, платить ничего не придётся. Точную сумму на конкретный автомобиль считаем в коммерческом предложении по курсу дня.</p></div>
+    <div class="stg rv">
+      <div class="sh"><em>1</em><b>Предоплата — при подписании договора</b><span>50 000 ₽ — в счёт подбора автомобиля и сопровождения сделки (всего 90 000 ₽: проверка машины и документов, договор)</span></div>
+    </div>
+    <div class="stg rv">
+      <div class="sh"><em>2</em><b>Оплата автомобиля — после договора</b><span>через банк ВТБ по контракту и инвойсу. С этой оплаты автомобиль Ваш</span></div>
+      <div class="inc">
+        <div><b>Автомобиль в Китае</b><span>по курсу банка ВТБ на день оплаты</span></div>
+        <div><b>Доставка из Китая в Россию</b><span>автовозом</span></div>
+        <div><b>Погрузка и доставка по Китаю</b><span>от продавца до нашей площадки на автовозе</span></div>
+        <div><b>Комиссия банка за перевод</b><span>2% от стоимости автомобиля и доставки</span></div>
+      </div>
+    </div>
+    <div class="stg rv">
+      <div class="sh"><em>3</em><b>Таможенные платежи — по прибытии в город растаможки</b><span>пошлина, сборы, склад и оформление документов</span></div>
+      <div class="inc">
+        <div><b>Таможенная пошлина</b><span>для автомобилей 3–5 лет — по объёму двигателя, для электромобилей — от стоимости</span></div>
+        <div><b>Таможенный сбор</b><span>зависит от стоимости автомобиля</span></div>
+        <div><b>Утилизационный сбор</b><span>у моделей из каталога льготный: 3 400 ₽ до 3 лет, 5 200 ₽ от 3 до 5 лет</span></div>
+        <div><b>Склад временного хранения</b><span>первые сутки</span></div>
+        <div><b>Оформление документов</b><span>растаможка, СБКТС и электронный ПТС — 80 000 ₽</span></div>
+      </div>
+    </div>
+    <div class="stg rv">
+      <div class="sh"><em>4</em><b>При выдаче автомобиля</b><span>остаток за подбор и сопровождение — 40 000 ₽</span></div>
     </div>
     <p class="note rv"><b>Оплачивается отдельно:</b> постановка на учёт в ГИБДД и страховка — по тарифам ГИБДД и страховой.</p>
   </div>
@@ -349,15 +369,15 @@ section.sec{padding:90px 0 10px}
   <div class="wrap">
     <div class="eb">Как проходит сделка</div>
     <div class="hd"><h2 class="rv">Семь шагов <span class="acc">от выбора до ключей</span></h2>
-      <p class="rv">Срок от оплаты до выдачи — обычно 45–60 дней. На каждом шаге Вы знаете, что уже сделано и что дальше.</p></div>
+      <p class="rv">Срок от оплаты до выдачи — обычно 50–65 дней. На каждом шаге Вы знаете, что уже сделано и что дальше.</p></div>
     <div class="steps">
       <div class="step rv"><div class="n">01</div><small>Шаг первый</small><b>Выбор автомобиля</b><span>Выбираете модель из каталога или предлагаете свою, называете бюджет — мы подбираем несколько оптимальных вариантов.</span></div>
       <div class="step rv"><div class="n">02</div><small>Шаг второй</small><b>Подбор и проверка</b><span>По выбранному Вами варианту проверяем историю машины по базам и по желанию её техническое состояние на месте, готовим отчёт и присылаем фото и видео.</span></div>
-      <div class="step rv"><div class="n">03</div><small>Шаг третий</small><b>Договор и оплата</b><span>Высылаем договор, контракт и инвойс. Оплата через банк ВТБ.</span></div>
+      <div class="step rv"><div class="n">03</div><small>Шаг третий</small><b>Договор и оплата</b><span>Высылаем договор, контракт и инвойс. Оплата через банк ВТБ.</span><span class="spay">Оплата 1 — предоплата 50 000 ₽<br>Оплата 2 — автомобиль, доставка, погрузка и комиссия банка</span></div>
       <div class="step rv"><div class="n">04</div><small>Шаг четвёртый</small><b>Доставка</b><span>Погрузка на автовоз, доставка до границы и дальше — в Ваш город.</span></div>
-      <div class="step rv"><div class="n">05</div><small>Шаг пятый</small><b>Таможня</b><span>Помогаем оплатить пошлину, таможенный и утилизационный сборы: подскажем суммы, реквизиты и сроки.</span></div>
-      <div class="step rv"><div class="n">06</div><small>Шаг шестой</small><b>Документы</b><span>Растаможиваем автомобиль, оформляем СБКТС и электронный ПТС.</span></div>
-      <div class="step rv"><div class="n">07</div><small>Шаг седьмой</small><b>Выдача</b><span>Получаете ключи, ЭПТС и таможенные документы и ставите машину на учёт.</span></div>
+      <div class="step rv"><div class="n">05</div><small>Шаг пятый</small><b>Документы</b><span>Оформляем СБКТС и электронный ПТС.</span></div>
+      <div class="step rv"><div class="n">06</div><small>Шаг шестой</small><b>Таможня</b><span>Растаможиваем автомобиль: помогаем оплатить пошлину и сборы, подскажем суммы и реквизиты. Все платежи уже учтены в цене каталога.</span><span class="spay">Оплата 3 — пошлина, сборы, СВХ и оформление документов</span></div>
+      <div class="step rv"><div class="n">07</div><small>Шаг седьмой</small><b>Выдача</b><span>Получаете ключи, ЭПТС и таможенные документы и ставите машину на учёт.</span><span class="spay">Оплата 4 — остаток 40 000 ₽ за подбор и сопровождение</span></div>
       <div class="step fin rv"><p>Расскажите, какую машину и в какой город хотите, — подберём варианты.</p><a class="btn g sm" href="#contacts">Написать Юрию <span class="ar">→</span></a></div>
     </div>
   </div>
@@ -370,13 +390,13 @@ section.sec{padding:90px 0 10px}
       <p class="rv">Некоторые из автомобилей, которые мы привезли и передали владельцам.</p></div>
     <div class="dv">
       <article class="car rv"><div class="ph"><picture><source srcset="assets/img/d_xrv_1.webp" type="image/webp"><img src="assets/img/d_xrv_1.jpg" alt="Honda XR-V" loading="lazy" width="560" height="374"></picture><picture><source srcset="assets/img/d_xrv_2.webp" type="image/webp"><img src="assets/img/d_xrv_2.jpg" alt="" loading="lazy" width="560" height="374"></picture></div>
-        <div class="t"><h3>Honda XR-V 1.5 Comfort</h3><div class="sp">2022 · бензин, 131 л.с.</div><div class="city">Выдача: Санкт-Петербург</div><div class="pr"><b>1 769 998 ₽</b><span>итог под ключ</span></div></div></article>
+        <div class="t"><h3>Honda XR-V 1.5 Comfort</h3><div class="sp">2022 · 33 889 км · бензин, 131 л.с.</div><div class="city">Выдача: Санкт-Петербург</div><div class="pr"><b>1 769 998 ₽</b><span>итог под ключ</span></div></div></article>
       <article class="car rv"><div class="ph"><picture><source srcset="assets/img/d_q05_1.webp" type="image/webp"><img src="assets/img/d_q05_1.jpg" alt="Changan Qiyuan Q05" loading="lazy" width="560" height="374"></picture><picture><source srcset="assets/img/d_q05_2.webp" type="image/webp"><img src="assets/img/d_q05_2.jpg" alt="" loading="lazy" width="560" height="374"></picture></div>
-        <div class="t"><h3>Changan Qiyuan Q05 506Max</h3><div class="sp">2025 · электро, 163 л.с.</div><div class="city">Выдача: Ижевск</div><div class="pr"><b>2 214 339 ₽</b><span>итог под ключ</span></div></div></article>
+        <div class="t"><h3>Changan Qiyuan Q05 506Max</h3><div class="sp">2025 · 7 000 км · электро, 163 л.с.</div><div class="city">Выдача: Ижевск</div><div class="pr"><b>2 214 339 ₽</b><span>итог под ключ</span></div></div></article>
       <article class="car rv"><div class="ph"><picture><source srcset="assets/img/d_yaris_1.webp" type="image/webp"><img src="assets/img/d_yaris_1.jpg" alt="Toyota Yaris L" loading="lazy" width="560" height="374"></picture><picture><source srcset="assets/img/d_yaris_2.webp" type="image/webp"><img src="assets/img/d_yaris_2.jpg" alt="" loading="lazy" width="560" height="374"></picture></div>
-        <div class="t"><h3>Toyota Yaris L 1.5</h3><div class="sp">2022 · бензин, 107 л.с.</div><div class="city">Выдача: Пермь</div><div class="pr"><b>1 390 144 ₽</b><span>итог под ключ</span></div></div></article>
+        <div class="t"><h3>Toyota Yaris L 1.5</h3><div class="sp">2022 · 66 000 км · бензин, 107 л.с.</div><div class="city">Выдача: Пермь</div><div class="pr"><b>1 390 144 ₽</b><span>итог под ключ</span></div></div></article>
       <article class="car rv"><div class="ph"><picture><source srcset="assets/img/d_coolray_1.webp" type="image/webp"><img src="assets/img/d_coolray_1.jpg" alt="Geely Coolray" loading="lazy" width="560" height="374"></picture><picture><source srcset="assets/img/d_coolray_2.webp" type="image/webp"><img src="assets/img/d_coolray_2.jpg" alt="" loading="lazy" width="560" height="374"></picture></div>
-        <div class="t"><h3>Geely Coolray 1.4T</h3><div class="sp">2022 · бензин, 141 л.с.</div><div class="city">Выдача: Санкт-Петербург</div><div class="pr"><b>1 247 044 ₽</b><span>итог под ключ</span></div></div></article>
+        <div class="t"><h3>Geely Coolray 1.4T</h3><div class="sp">2022 · 13 500 км · бензин, 141 л.с.</div><div class="city">Выдача: Санкт-Петербург</div><div class="pr"><b>1 247 044 ₽</b><span>итог под ключ</span></div></div></article>
     </div>
     <p class="note rv">Цены — под ключ по договору, по курсу на день сделки.</p>
   </div>
@@ -385,13 +405,13 @@ section.sec{padding:90px 0 10px}
 <section class="sec" id="catalog">
   <div class="wrap">
     <div class="eb">Каталог</div>
-    <div class="hd"><h2 class="rv">91 модель под <span class="acc">льготный утильсбор</span></h2>
+    <div class="hd"><h2 class="rv">92 модели под <span class="acc">льготный утильсбор</span></h2>
       <p class="rv">Электромобили, гибриды и бензиновые машины до 160 л.с. — с ценой под ключ. Полный каталог — в нашем канале.</p></div>
     <div class="cat">
-      <div class="tile rv"><picture><source srcset="assets/img/sec0.webp" type="image/webp"><img src="assets/img/sec0.jpg" alt="Электромобили" loading="lazy" width="1000" height="558"></picture><div><b>Электро</b><span>Утильсбор 3 400 ₽. У автомобилей с мотором мощнее 58,8 кВт он около миллиона и выше.</span></div></div>
-      <div class="tile rv"><picture><source srcset="assets/img/sec1.webp" type="image/webp"><img src="assets/img/sec1.jpg" alt="Гибриды" loading="lazy" width="1000" height="558"></picture><div><b>Гибриды</b><span>Гибриды Toyota с льготным утильсбором: экономия топлива без зарядки от розетки.</span></div></div>
-      <div class="tile rv"><picture><source srcset="assets/img/sec2.webp" type="image/webp"><img src="assets/img/sec2.jpg" alt="Монопривод" loading="lazy" width="1000" height="558"></picture><div><b>Монопривод</b><span>Проверенные модели до 160 л.с. — утильсбор 5 200 ₽ вместо сотен тысяч.</span></div></div>
-      <div class="tile rv"><picture><source srcset="assets/img/sec3.webp" type="image/webp"><img src="assets/img/sec3.jpg" alt="Полный привод" loading="lazy" width="1000" height="558"></picture><div><b>Полный привод</b><span>Полный привод до 160 л.с. — тоже с льготным утильсбором 5 200 ₽.</span></div></div>
+      <div class="tile rv"><picture><source srcset="assets/img/sec0.webp" type="image/webp"><img src="assets/img/sec0.jpg" alt="Электромобили" loading="lazy" width="1000" height="558"></picture><div><b>Электро</b><span>Утильсбор 3 400 ₽, для б/у старше 3 лет — 5 200 ₽. У автомобилей с мотором мощнее 58,84 кВт он около 1 млн ₽ и выше.</span></div></div>
+      <div class="tile rv"><picture><source srcset="assets/img/sec1.webp" type="image/webp"><img src="assets/img/sec1.jpg" alt="Гибриды" loading="lazy" width="1000" height="558"></picture><div><b>Гибриды</b><span>С пробегом, возраст 3–5 лет. Гибриды Toyota с льготным утильсбором: экономия топлива без зарядки от розетки.</span></div></div>
+      <div class="tile rv"><picture><source srcset="assets/img/sec2.webp" type="image/webp"><img src="assets/img/sec2.jpg" alt="Монопривод" loading="lazy" width="1000" height="558"></picture><div><b>Монопривод</b><span>С пробегом, возраст 3–5 лет. Проверенные модели до 160 л.с. — утильсбор 5 200 ₽ вместо сотен тысяч.</span></div></div>
+      <div class="tile rv"><picture><source srcset="assets/img/sec3.webp" type="image/webp"><img src="assets/img/sec3.jpg" alt="Полный привод" loading="lazy" width="1000" height="558"></picture><div><b>Полный привод</b><span>С пробегом, возраст 3–5 лет. Полный привод до 160 л.с. — тоже с льготным утильсбором 5 200 ₽.</span></div></div>
     </div>
     <div class="any rv"><p><b>Любые автомобили.</b> Под заказ привезём любые машины из Китая, в том числе мощные, и посчитаем стоимость под ключ по Вашему запросу.</p><a class="btn g" data-cat href="CAT_HREF">Получить каталог <span class="ar">→</span></a></div>
   </div>
@@ -427,7 +447,7 @@ section.sec{padding:90px 0 10px}
   <button class="x" type="button" aria-label="Закрыть" data-close>×</button>
   <div class="eb">Каталог</div>
   <h3 id="getcat-h">Каталог — в нашем канале</h3>
-  <p>Подпишитесь на канал YuraZol Auto в Telegram или MAX. Сразу после подписки каталог 91&nbsp;модели с ценами под ключ можно скачать в канале.</p>
+  <p>Подпишитесь на канал YuraZol Auto в Telegram или MAX. Сразу после подписки каталог 92&nbsp;моделей с ценами под ключ можно скачать в канале.</p>
   <div class="mbtns">
     <a class="btn g" href="CAT_TG_HREF" target="_blank" rel="noopener">Канал в Telegram <span class="ar">→</span></a>
     <a class="btn g" href="CAT_MAX_HREF" target="_blank" rel="noopener">Канал в MAX <span class="ar">→</span></a>

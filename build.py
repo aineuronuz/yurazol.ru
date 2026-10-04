@@ -5,15 +5,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 CHANNELS = {"tg": "https://t.me/yurazol_auto", "mx": None}   # каналы YuraZol Auto для «Получить каталог»; в MAX канала пока нет
 MAX_HREF = "https://max.ru/u/f9LHodD0cOLQzwPoUyWBoejqc5iq940FAYmSIsMAm8Hr1FcNu85zWG126zY"
-SHORT = r"(?<![\wА-Яа-яЁё-])([вВкКсСоОуУиИаАяЯ]|на|На|по|По|до|До|от|От|из|Из|не|Не|за|За|для|Для|без|Без|при|При|или|под|Под|что|до|мы|Мы|их|её|он)( )"
+SHORT = r"(?<![\wА-Яа-яЁё/-])([вВкКсСоОуУиИаАяЯ]|на|На|по|По|до|До|от|От|из|Из|не|Не|за|За|для|Для|без|Без|при|При|или|под|Под|что|до|мы|Мы|их|её|он)( )"
 
 
 def typo(text):
     text = re.sub(SHORT, r"\1&nbsp;", text)
     text = re.sub(r" (—|–)", r"&nbsp;\1", text)           # тире не в начале строки
     text = re.sub(r"(\d) (\d{3})", r"\1&nbsp;\2", text)     # 1 769 998
-    text = re.sub(r"(\d) (₽|¥|л\.с\.|кВт|дней|лет|%)", r"\1&nbsp;\2", text)
-    text = re.sub(r"(\d+–\d+)", r'<span class="nw">\1</span>', text)  # 45–60 не рвать
+    text = re.sub(r"(\d) (₽|¥|л\.с\.|кВт|км|млн|дней|лет|%)", r"\1&nbsp;\2", text)
+    text = re.sub(r"(\d+–\d+)", r'<span class="nw">\1</span>', text)  # 50–65 не рвать
+    text = text.replace("б/у", '<span class="nw">б/у</span>')        # не рвать на косой черте
     return text
 
 
