@@ -31,10 +31,14 @@ SITES = {
     "yurazol.ru": dict(
         inbox=ROOT.parent / "foto-inbox", docs=ROOT / "docs", brand="YuraZol Авто",
         icon='<link rel="icon" type="image/png" href="../../assets/favicon.png">\n',
-        logo='<img src="../../assets/img/logo96.png" alt="" width="40" height="39">', more=""),
-    "mtk-vostok-avto.ru": dict(   # логотипа и значка у МТК пока нет
+        head='<img src="../../assets/img/logo96.png" alt="" width="40" height="39">'
+             '<span><b>YuraZol Авто</b><small>автомобили из Китая под ключ</small></span>', more=""),
+    "mtk-vostok-avto.ru": dict(   # шапка — логотип и название, как на сайте и в КП (Юрий 06.10)
         inbox=ROOT.parent / "foto-inbox-mtk", docs=ROOT.parent / "mtk-vostok-avto.ru" / "docs", brand="МТК Восток-Авто",
-        icon="", logo="", more='<a class="btn" href="../../#contacts">Все контакты</a>'),
+        icon='<link rel="icon" type="image/png" href="../../favicon.png">\n',
+        head='<img class="lg" src="../../img/logo128.png" alt="" width="48" height="48">'
+             '<img class="nm" src="../../img/name_b.png" alt="Восток-Авто — международная транспортная компания" width="250" height="38">',
+        more='<a class="btn" href="../../kontakty/">Все контакты</a>'),
 }
 
 
@@ -73,7 +77,7 @@ def build(code, site="yurazol.ru"):
         for n, w, h in items)
     page = TEMPLATE.replace("{TITLE}", t).replace("{COUNT}", str(len(items))).replace("{CARDS}", cards) \
                    .replace("{MAX}", MAX_HREF).replace("{WORD}", word(len(items))) \
-                   .replace("{BRAND}", cfg["brand"]).replace("{ICON}", cfg["icon"]).replace("{LOGO}", cfg["logo"]).replace("{MORE}", cfg["more"])
+                   .replace("{BRAND}", cfg["brand"]).replace("{ICON}", cfg["icon"]).replace("{HEAD}", cfg["head"]).replace("{MORE}", cfg["more"])
     (out / "index.html").write_text(page, encoding="utf-8")
     print(f"{out}: {len(items)} фото — https://{site}/foto/{code}/#1")
 
@@ -104,6 +108,9 @@ body{margin:0;background:#f5f7fb;color:#0e1b2e;font:16px/1.55 'Roboto Flex',-app
 .wrap{max-width:1240px;margin:0 auto;padding:0 18px}
 header{display:flex;align-items:center;gap:12px;padding:18px 0 6px}
 header img{width:40px;height:39px}
+.hb{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}
+header img.lg{width:48px;height:48px} header img.nm{width:250px;height:auto}
+@media (max-width:560px){header img.lg{width:40px;height:40px} header img.nm{width:200px}}
 header b{font-family:'Unbounded',sans-serif;font-weight:700;font-size:15px}
 header small{display:block;color:rgba(14,27,46,.6);font-size:12px;margin-top:2px}
 h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(22px,3.4vw,36px);line-height:1.15;margin:26px 0 8px}
@@ -125,7 +132,7 @@ background:#fff;color:#1d3d6b;border:1px solid rgba(29,61,107,.2)}
 </head>
 <body>
 <div class="wrap">
-  <header>{LOGO}<span><b>{BRAND}</b><small>автомобили из Китая под ключ</small></span></header>
+  <header><a class="hb" href="../../" aria-label="{BRAND} — на главную">{HEAD}</a></header>
   <h1>{TITLE}</h1>
   <p class="sub">{COUNT} {WORD} автомобиля. Нажмите на фото — откроется в полном размере: листайте пальцем, приближайте двумя пальцами.</p>
   <div class="g" id="g">
