@@ -24,8 +24,8 @@ og = ImageOps.fit(hall, (1200, 630), Image.LANCZOS, centering=(0.5, 0.62))
 og.convert("RGB").save(OUT / "og.jpg", quality=84, optimize=True)
 
 # разделы каталога
-for i in range(4):
-    save(Image.open(AC / f"catalog/cars/hero_sec{i}.jpg"), f"sec{i}", 1000, 78)
+for i in range(4):   # «Гибриды» — Toyota Levin с табличкой YuraZol Auto из cars_plate: в cars/ на нём ВОСТОК-АВТО («Авто» 20.10.2026)
+    save(Image.open(AC / f"catalog/{'cars_plate' if i == 1 else 'cars'}/hero_sec{i}.jpg"), f"sec{i}", 1000, 78)
 
 # примеры выданных автомобилей
 for k in ("xrv", "q05", "yaris", "coolray"):
