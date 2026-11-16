@@ -42,6 +42,17 @@ SITES = {
 }
 
 
+def signs(f):
+    """Размыть вывески, названия и телефоны продавцов на фото (Юрий 16.11.2026; sign_blur.py сайта МТК). Без OCR — фото как есть."""
+    try:
+        sys.path.insert(0, str(ROOT.parent / "mtk-vostok-avto.ru" / "new"))
+        import sign_blur
+        return sign_blur.clean(f)
+    except Exception as e:  # noqa: BLE001
+        print("  размытие вывесок:", f, e)
+        return []
+
+
 def build(code, site="yurazol.ru"):
     cfg = SITES[site]
     if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", code):
@@ -65,6 +76,8 @@ def build(code, site="yurazol.ru"):
             im.save(out / f"{n}.jpg", quality=86, optimize=True, progressive=True)
         else:   # уже в пределах — копируем как есть, без пережатия (метаданные снимаем)
             Image.open(f).save(out / f"{n}.jpg", quality="keep", optimize=True, progressive=True, exif=b"")
+        if signs(out / f"{n}.jpg"):
+            im = Image.open(out / f"{n}.jpg").convert("RGB")
         th = im.copy()
         th.thumbnail((640, 640), Image.LANCZOS)
         th.save(out / "t" / f"{n}.jpg", quality=80, optimize=True, progressive=True)
