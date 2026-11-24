@@ -1,5 +1,8 @@
 """Скриншоты для Юрия: python3 shot.py [палитра]"""
 import sys
+from pathlib import Path
+if (Path.home() / "auto-china" / "NO_SERVER_BROWSER").exists():   # браузер на сервере запрещён (флаг группы «Авто», KATE 24.11.2026)
+    sys.exit("Chromium на сервере запрещён (~/auto-china/NO_SERVER_BROWSER). Снимки страниц — через ПК «Рязань»: python3 ~/yurazol-sites/tools/pc_shot.py <адрес>")
 from playwright.sync_api import sync_playwright
 pal = sys.argv[1] if len(sys.argv) > 1 else ""
 url = "file:///home/sergei/yurazol-sites/yurazol.ru/docs/index.html" + (f"?p={pal}" if pal else "")
